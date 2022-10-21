@@ -28,9 +28,7 @@ I'm a self-taught passionate FrontEnd developer from India 🇮🇳
 <br />
 <br />
 
-<a href="https://twitter.com/Sharvi99">
-  <img align="right" alt="Sharvi99| Twitter" width="21px" src="https://raw.githubusercontent.comSharvi99/Sharvi99/master/assets/twitter.svg" />
-</a>
+
 <a href="https://codesandbox.io/u/Sharvi99">
   <img align="right" alt="Sharvi99 | CodeSandbox" width="20px" src="https://raw.githubusercontent.com/Sharvi99/master/assets/codesandbox.svg" />
 </a>
