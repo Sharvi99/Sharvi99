@@ -1,0 +1,141 @@
+MariaDB [sharvin]> create table jobs (job_id int primary key,job_title varchar(15),min_salary int,max_salary int);
+Query OK, 0 rows affected (0.22 sec)
+
+MariaDB [sharvin]> insert into jobs values(1,'manager',30000,80000);
+Query OK, 1 row affected (0.03 sec)
+
+MariaDB [sharvin]> insert into jobs values(2,'pa',20000,40000);
+Query OK, 1 row affected (0.04 sec)
+
+MariaDB [sharvin]> insert into jobs values(3,'coordinator',30000,50000);
+Query OK, 1 row affected (0.04 sec)
+
+MariaDB [sharvin]> insert into jobs values(4,'clerk',15000,20000);
+Query OK, 1 row affected (0.03 sec)
+
+MariaDB [sharvin]> insert into jobs values(5,'clerk',14000,30000);
+Query OK, 1 row affected (0.03 sec)
+
+MariaDB [sharvin]> select * from jobs;
++--------+-------------+------------+------------+
+| job_id | job_title   | min_salary | max_salary |
++--------+-------------+------------+------------+
+|      1 | manager     |      30000 |      80000 |
+|      2 | pa          |      20000 |      40000 |
+|      3 | coordinator |      30000 |      50000 |
+|      4 | clerk       |      15000 |      20000 |
+|      5 | clerk       |      14000 |      30000 |
++--------+-------------+------------+------------+
+5 rows in set (0.00 sec)
+
+MariaDB [sharvin]> create table departments (department_id int primary key,department_name varchar(15));
+Query OK, 0 rows affected (0.23 sec)
+
+MariaDB [sharvin]> insert into departments values(1,'importing');
+Query OK, 1 row affected (0.04 sec)
+
+MariaDB [sharvin]> insert into departments values(2,'exporting');
+Query OK, 1 row affected (0.04 sec)
+
+MariaDB [sharvin]> insert into departments values(3,'managing');
+Query OK, 1 row affected (0.03 sec)
+
+MariaDB [sharvin]> insert into departments values(4,'resource');
+Query OK, 1 row affected (0.04 sec)
+
+MariaDB [sharvin]> insert into departments values(5,'funding');
+Query OK, 1 row affected (0.04 sec)
+
+MariaDB [sharvin]> select * from table;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'table' at line 1
+MariaDB [sharvin]> select * from departments;;
++---------------+-----------------+
+| department_id | department_name |
++---------------+-----------------+
+|             1 | importing       |
+|             2 | exporting       |
+|             3 | managing        |
+|             4 | resource        |
+|             5 | funding         |
++---------------+-----------------+
+5 rows in set (0.00 sec)
+
+MariaDB [sharvin]> create table employees (empid int,fstname varchar(30),lastname varchar(15),email varchar(30),phnnumber bigint,hire date,jobid int references jobs,salary int,managerid int,deptid int);
+Query OK, 0 rows affected (0.18 sec)
+
+MariaDB [sharvin]> insert into employees values(1,'Rosmi','Babu','rosmibabu@gmail.com',9967543298,'2022-06-10',1,50000,1,1);
+Query OK, 1 row affected (0.04 sec)
+
+MariaDB [sharvin]> insert into employees values(2,'Adheena','Sageer','adheenasageer@gmail.com',9967542298,'2022-06-20',1,30000,2,2);
+Query OK, 1 row affected (0.04 sec)
+
+MariaDB [sharvin]> insert into employees values(3,'Bibin','Jeevan','bibinjeevan@gmail.com',9967542348,'2022-06-15',3,20000,3,3);
+Query OK, 1 row affected (0.03 sec)
+
+MariaDB [sharvin]> insert into employees values(4,'Sharvin','Bendict','sharvinbendict@gmail.com',9956432178,'2022-05-30',3,15000,4,4);
+Query OK, 1 row affected (0.03 sec)
+
+MariaDB [sharvin]> insert into employees values(5,'Rithik','Rajesh','rithikrajesh@gmail.com',9955532178,'2022-05-27',3,14000,5,5);
+Query OK, 1 row affected (0.04 sec)
+
+MariaDB [sharvin]> select * from employees;
++-------+---------+----------+--------------------------+------------+------------+-------+--------+-----------+--------+
+| empid | fstname | lastname | email                    | phnnumber  | hire       | jobid | salary | managerid | deptid |
++-------+---------+----------+--------------------------+------------+------------+-------+--------+-----------+--------+
+|     1 | Rosmi   | Babu     | rosmibabu@gmail.com      | 9967543298 | 2022-06-10 |     1 |  50000 |         1 |      1 |
+|     2 | Adheena | Sageer   | adheenasageer@gmail.com  | 9967542298 | 2022-06-20 |     1 |  30000 |         2 |      2 |
+|     3 | Bibin   | Jeevan   | bibinjeevan@gmail.com    | 9967542348 | 2022-06-15 |     3 |  20000 |         3 |      3 |
+|     4 | Sharvin | Bendict  | sharvinbendict@gmail.com | 9956432178 | 2022-05-30 |     3 |  15000 |         4 |      4 |
+|     5 | Rithik  | Rajesh   | rithikrajesh@gmail.com   | 9955532178 | 2022-05-27 |     3 |  14000 |         5 |      5 |
++-------+---------+----------+--------------------------+------------+------------+-------+--------+-----------+--------+
+5 rows in set (0.00 sec)
+
+MariaDB [sharvin]> select * from employees where salary>30000;
++-------+---------+----------+---------------------+------------+------------+-------+--------+-----------+--------+------------+
+| empid | fstname | lastname | email               | phnnumber  | hire       | jobid | salary | managerid | deptid | commission |
++-------+---------+----------+---------------------+------------+------------+-------+--------+-----------+--------+------------+
+|     1 | Rosmi   | Babu     | rosmibabu@gmail.com | 9967543298 | 2022-06-10 |     1 |  50000 |         1 |      1 |       NULL |
++-------+---------+----------+---------------------+------------+------------+-------+--------+-----------+--------+------------+
+1 row in set (0.00 sec)
+
+MariaDB [sharvin]> update employees set commission=1000 where empid=1;
+Query OK, 1 row affected (0.04 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [sharvin]> update employees set commission=900 where empid=2;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [sharvin]> update employees set commission=800 where empid=3;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [sharvin]> update employees set commission=700 where empid=4;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [sharvin]> update employees set commission=600 where empid=5;
+Query OK, 1 row affected (0.03 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+MariaDB [sharvin]> select * from employees;
++-------+---------+----------+--------------------------+------------+------------+-------+--------+-----------+--------+------------+
+| empid | fstname | lastname | email                    | phnnumber  | hire       | jobid | salary | managerid | deptid | commission |
++-------+---------+----------+--------------------------+------------+------------+-------+--------+-----------+--------+------------+
+|     1 | Rosmi   | Babu     | rosmibabu@gmail.com      | 9967543298 | 2022-06-10 |     1 |  50000 |         1 |      1 |       1000 |
+|     2 | Adheena | Sageer   | adheenasageer@gmail.com  | 9967542298 | 2022-06-20 |     1 |  30000 |         2 |      2 |        900 |
+|     3 | Bibin   | Jeevan   | bibinjeevan@gmail.com    | 9967542348 | 2022-06-15 |     3 |  20000 |         3 |      3 |        800 |
+|     4 | Sharvin | Bendict  | sharvinbendict@gmail.com | 9956432178 | 2022-05-30 |     3 |  15000 |         4 |      4 |        700 |
+|     5 | Rithik  | Rajesh   | rithikrajesh@gmail.com   | 9955532178 | 2022-05-27 |     3 |  14000 |         5 |      5 |        600 |
++-------+---------+----------+--------------------------+------------+------------+-------+--------+-----------+--------+------------+
+5 rows in set (0.00 sec)
+
+MariaDB [sharvin]> delete from employees where empid=4;
+Query OK, 1 row affected (0.03 sec)
+
+MariaDB [sharvin]> truncate table departments;
+Query OK, 0 rows affected (0.18 sec)
+
+MariaDB [sharvin]> drop table jobs;
+Query OK, 0 rows affected (0.10 sec)
+
